@@ -1,8 +1,8 @@
 import datetime
 
 from django.db import models
-from django.db import timezone
-from django.form import ModelForms
+from django.utils import timezone
+from django import forms
 
 from django.contrib.auth.models import User
 
@@ -24,7 +24,7 @@ class Product(models.Model):
 
     product_name = models.CharField(max_length=30)
     amount = models.FloatField(max_length=6)
-    unit = models.CharField(max_length=5, choices=UNITS) #tu rozwijana lista z jednostkami: pcs, kg, l, box, bottle, dag
+    unit = models.CharField(max_length=6, choices=UNITS) #tu rozwijana lista z jednostkami: pcs, kg, l, box, bottle, dag
     comment = models.CharField(max_length=100)
     need_date = models.DateTimeField(verbose_name="Needed before:")
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
@@ -35,21 +35,21 @@ class Product(models.Model):
         return self.product_name
     
     class Meta:
-        verbose_name = ('Product')
-        verbose_name_plural = ('Products')
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
 
 
 # categories = shopping lists for eg. groceries, meds, sports& outdoor, etc.
 class Category(models.Model):
 
-    category_name = models.CharField('Category', on_delete=models.CASCADE)
-    max_length=30,
-    unique=True,
-    verbose_name=("Category"),
+    name = models.CharField(
+        max_length=30,
+        unique=True,
+        verbose_name='Category'),
 
     class Meta:
-       verbose_name = ('Category')
-       verbose_name_plural = ('Categories')
+       verbose_name = 'Category'
+       verbose_name_plural = 'Categories'
 
 
 # class User(models.Model):
