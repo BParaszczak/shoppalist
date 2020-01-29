@@ -1,3 +1,13 @@
 from django.shortcuts import render
 
-# Create your views here.
+from .models import Product, Category
+
+
+
+# /index/
+# /shopping/
+# /product/add/
+# /products/
+# /categories/
+# /categories/add/
+# /category/<category_id>/
