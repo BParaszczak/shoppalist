@@ -2,6 +2,7 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
+from django.utils.timezone import now
 
 from django.contrib.auth.models import User
 
@@ -21,18 +22,31 @@ class Product(models.Model):
         ('m', 'm'),
     ]
 
-    name = models.CharField(max_length=30)
-    amount = models.FloatField(max_value=100)
-    unit = models.CharField(max_length=6, choices=UNITS, default='pcs') #tu rozwijana lista z jednostkami: pcs, kg, l, box, bottle, dag
-    comment = models.CharField(max_length=100)
-    # add_date = models.DateTimeField(, verbose_name="Added")
-    need_date = models.DateTimeField(verbose_name="Needed before")
-    categories = models.ManyToManyField('Category', blank=False)
+    URGENT = [
+        ('yes', 'Tak'),
+        ('no', 'Nie')
+    ]
 
-    owner = models.ForeignKey(User, on_delete=models.PROTECT)
+    name = models.CharField(max_length=30)
+    amount = models.FloatField(blank=True, default=0)
+    unit = models.CharField(max_length=6, choices=UNITS, default='pcs') #tu rozwijana lista z jednostkami: pcs, kg, l, box, bottle, dag
+    comment = models.CharField(max_length=100, blank=True, default='-')
+    # add_date = models.DateTimeField(, verbose_name="Added")
+    urgency = models.CharField(max_length=10, verbose_name="Urgent", choices=URGENT, default='no')
+    categories = models.ManyToManyField(
+        'Category', 
+        through='Entry',
+        through_fields=('product', 'category'), 
+        blank=False,
+        )
+
+    owner = models.ForeignKey(User, on_delete=models.PROTECT, blank=True, default='All')
 
     def __str__(self):
         return f"{self.product_name} {self.amount} {self.unit} {self.comment}"
+
+    def get_absolute_url(self):
+        return reverse('name', args=[self.pk])
     
     class Meta:
         verbose_name = 'Product'
@@ -48,16 +62,25 @@ class Category(models.Model):
         verbose_name='Category',
     )
 
+    def __str__(self):
+        return self.name
+
     class Meta:
        verbose_name = 'Category'
        verbose_name_plural = 'Categories'
 
+# data dodania produktu do aplikacji
+class Entry(models.Model):
 
-class Added(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    add_date = models.DateTimeField(verbose_name="Entry date", default=now)
 
-    product = models.ForeignKey('Product')
-    category = models.ForeignKey('Category')
-    add_date = models.DateTimeField(verbose_name="Added")
+    class Meta:
+        verbose_name = 'Entry'
+        verbose_name_plural = 'Entries'
+        ordering = ['add_date']
+
 
 
 # class User(models.Model):
