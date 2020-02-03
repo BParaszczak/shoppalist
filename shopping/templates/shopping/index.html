@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{{ title }}
+{% block content %}
+<ul>
+    <li><a href="{% url 'categories' %}">Moje listy</a></li>
+    <li><a href="{% url 'products' %}">Moje produkty</a></li>
+    <li><a href="{% url 'c_add' %}">Utwórz nową listę</a></li>
+    <li><a href="{% url 'p_add' %}">Dodaj produkt</a></li>
+</ul>
+
+
+{% endblock %}

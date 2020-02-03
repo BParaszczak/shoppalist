@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Rock+Salt&display=swap" rel="stylesheet">
+    <title>ShoppaList &ndash; {{ title }}</title>
+    <style>
+        body {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background-color: #053756;
+            color: #ffffff;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-family: 'Rock Salt', cursive;
+            color: #fff;
+        }
+
+        h3 {
+            font-size: 18px;
+            color: #f39129;
+        }
+
+        ul {
+            list-style: none;
+            line-height: 1.3;
+        }
+
+        ul a {
+            text-decoration: none;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>$hoppaList</h1>
+    <h3>{{ title }}</h3>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Start</a></li>
+            <li><a href="shopping/cat_list.html">Moje listy</a></li>
+            <li><a href="shopping/product_list.html">Produkty</a></li>
+        </ul>
+        <!-- przycisk login/logout -->
+        <!-- link do admina -->
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+        &copy; Beata Paraszczak 2020
+    </footer>
+</body>
+
+</html>

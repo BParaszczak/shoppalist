@@ -27,7 +27,11 @@ class Migration(migrations.Migration):
             name='amount',
             field=models.FloatField(blank=True, default=0),
         ),
-        migrations.AlterField(
+        migrations.RemoveField(
+            model_name='product',
+            name='categories',
+        ),
+        migrations.AddField(
             model_name='product',
             name='categories',
             field=models.ManyToManyField(through='shopping.Entry', to='shopping.Category'),

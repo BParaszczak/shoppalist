@@ -3,6 +3,7 @@ import datetime
 from django.db import models
 from django.utils import timezone
 from django.utils.timezone import now
+from django.urls import reverse
 
 from django.contrib.auth.models import User
 
@@ -27,26 +28,27 @@ class Product(models.Model):
         ('no', 'Nie')
     ]
 
-    name = models.CharField(max_length=30)
-    amount = models.FloatField(blank=True, default=0)
-    unit = models.CharField(max_length=6, choices=UNITS, default='pcs') #tu rozwijana lista z jednostkami: pcs, kg, l, box, bottle, dag
-    comment = models.CharField(max_length=100, blank=True, default='-')
+    name = models.CharField(max_length=50, verbose_name="Nazwa")
+    amount = models.FloatField(blank=True, default=0, verbose_name="Ilość")
+    unit = models.CharField(max_length=6, choices=UNITS, default='pcs', verbose_name="Jednostka") #tu rozwijana lista z jednostkami: pcs, kg, l, box, bottle, dag
+    comment = models.CharField(max_length=100, blank=True, default='-', verbose_name="Uwagi")
     # add_date = models.DateTimeField(, verbose_name="Added")
-    urgency = models.CharField(max_length=10, verbose_name="Urgent", choices=URGENT, default='no')
+    urgency = models.CharField(max_length=10, verbose_name="Pilne", choices=URGENT, default='no')
     categories = models.ManyToManyField(
         'Category', 
         through='Entry',
         through_fields=('product', 'category'), 
-        blank=False,
+        blank=True,
+        verbose_name="Lista"
         )
 
-    owner = models.ForeignKey(User, on_delete=models.PROTECT, blank=True, default='All')
+    owner = models.ForeignKey(User, on_delete=models.PROTECT, blank=True, null=True, verbose_name="Prywatne")
 
     def __str__(self):
-        return f"{self.product_name} {self.amount} {self.unit} {self.comment}"
+        return f"{self.name} {self.amount} {self.unit} {self.comment}"
 
     def get_absolute_url(self):
-        return reverse('name', args=[self.pk])
+        return reverse('product', args=[self.pk])
     
     class Meta:
         verbose_name = 'Product'
@@ -59,12 +61,15 @@ class Category(models.Model):
     name = models.CharField(
         max_length=30,
         unique=True,
-        verbose_name='Category',
+        verbose_name='Lista',
     )
 
     def __str__(self):
         return self.name
-
+    
+    def get_absolute_url(self):
+        return reverse('category', args=[self.pk])
+    
     class Meta:
        verbose_name = 'Category'
        verbose_name_plural = 'Categories'

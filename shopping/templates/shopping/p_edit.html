@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <!-- <label>
+        <button type="button"><a href="products/<int:pk>/">Anuluj</a>
+    </label> -->
+    <label>
+        <input type="submit" value="Zatwierdź zmiany">
+    </label>
+
+</form>
+
+{% endblock %}
