@@ -3,7 +3,11 @@
 {% block content %}
 <ul>
     {% for cat in object_list %}
-    <li><a href="{% url 'category' cat.pk %}">{{ cat }}</a></li>
+    <li><a href="{% url 'category' cat.pk %}">{{ cat }} ({{ cat.liczba }})</a></li>
     {% endfor %}
+</ul>
+
+<ul class="buttons">
+    <li><a class="sub" href="{% url 'c_add' %}">Dodaj nową listę</a></li>
 </ul>
 {% endblock %}

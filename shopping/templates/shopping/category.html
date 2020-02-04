@@ -2,6 +2,18 @@
 
 {% block content %}
 
-{{ object }}
+<p>{{ object }}</p>
+
+<ul>
+    {% for p in object.product_set.all %}
+    <li><input class=bought type="checkbox">&nbsp;<a href="{% url 'product' p.pk %}">{{ p }}</a></li>
+    {% endfor %}
+</ul>
+
+<ul class="buttons">
+    <li><a class="sub" href="{% url 'categories' %}">Wróć do moich list</a></li>
+    <li><a class="sub" href="{% url 'c_edit' pk=object.pk %}">Zmień nazwę listy</a></li>
+    <li><a class="sub" href="{% url 'c_delete' pk=object.pk %}">Usuń listę</a></li>
+</ul>
 
 {% endblock %}

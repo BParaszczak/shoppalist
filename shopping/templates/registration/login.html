@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if user.is_authenticated %}Zaloguj się{% endif %}
+{% if form.errors %}
+<p class="errorlist">Błędna nazwa użytkownika lub hasło.</p>
+{% endif %}
+
+<h3>Zaloguj:</h3>
+
+<form method='POST' action="{% url 'login' %}">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>Nazwa użytkownika:</td>
+            <td><input type="text" placeholder="użytkownik" name="username"></td>
+        </tr>
+        <tr>
+            <td>Hasło:</td>
+            <td><input type="password" placeholder="hasło" name="password"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="hidden" name="next" value="{{ next }}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input class="sub" type="submit" value="Zaloguj"></td>
+        </tr>
+    </table>
+
+
+</form>
+<small><a href="{% url 'password_reset' %}">Zmiana hasła</a></small>
+{% endblock %}

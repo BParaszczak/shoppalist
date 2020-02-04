@@ -3,11 +3,20 @@
 {% block content %}
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <label>
-        <input type="submit" value="Zatwierdź">
-    </label>
+    <table>
+        <tr>
+            <td>{{ form.as_p }}</td>
+        </tr>
+    </table>
+    <table class="buttons">
+        <tr>
+            <td><a class="sub" href="{% url 'categories' %}">Anuluj</a></td>
+            <td><label>
+                    <input class="sub" type="submit" value="Zatwierdź">
+                </label></td>
+        </tr>
 
+    </table>
 </form>
 
 {% endblock %}

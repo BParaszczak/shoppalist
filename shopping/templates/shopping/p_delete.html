@@ -2,13 +2,19 @@
 
 {% block content %}
 
+{{ object }}
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <label>
-        <input type="submit" value="Usuń produkt">
-    </label>
+    <table class="buttons">
+        <tr>
+            <td><a class="sub" href="{% url 'product' pk=object.pk %}">Anuluj</a></td>
+            <td><label>
+                    <input class="sub" type="submit" value="Usuń produkt">
+                </label></td>
+        </tr>
 
+    </table>
 </form>
 
 {% endblock %}

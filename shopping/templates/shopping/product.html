@@ -4,4 +4,11 @@
 
 {{ object }}
 
+<ul class="buttons">
+    <li><a class="sub" href="{% url 'products' %}">Wróć do listy</a></li>
+    <li><a class="sub" href="{% url 'p_edit' pk=object.pk %}">Edytuj</a></li>
+    <li><a class="sub" href="{% url 'p_delete' pk=object.pk %}">Usuń produkt</a></li>
+</ul>
+
+
 {% endblock %}

@@ -4,13 +4,15 @@
 
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <!-- <label>
-        <button type="button"><a href="products/<int:pk>/">Anuluj</a>
-    </label> -->
-    <label>
-        <input type="submit" value="Zatwierdź zmiany">
-    </label>
+    <table>{{ form.as_table }}</table>
+    <table class="buttons">
+        <tr>
+            <td><a class="sub" href="{% url 'product' pk=object.pk %}">Anuluj</a></td>
+            <td><label>
+                    <input class="sub" type="submit" value="Zatwierdź zmiany">
+                </label></td>
+        </tr>
+    </table>
 
 </form>
 

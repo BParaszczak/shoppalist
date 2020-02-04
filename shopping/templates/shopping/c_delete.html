@@ -4,4 +4,18 @@
 
 {{ object }}
 
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <table class="buttons">
+        <tr>
+            <td><a class="sub" href="{% url 'categories' %}">Anuluj</a></td>
+            <td><label>
+                    <input class="sub" type="submit" value="Usuń listę">
+                </label></td>
+        </tr>
+
+    </table>
+</form>
+
 {% endblock %}

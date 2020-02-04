@@ -39,7 +39,7 @@ class Product(models.Model):
         through='Entry',
         through_fields=('product', 'category'), 
         blank=True,
-        verbose_name="Lista"
+        verbose_name="Nazwa listy"
         )
 
     owner = models.ForeignKey(User, on_delete=models.PROTECT, blank=True, null=True, verbose_name="Prywatne")
@@ -61,7 +61,7 @@ class Category(models.Model):
     name = models.CharField(
         max_length=30,
         unique=True,
-        verbose_name='Lista',
+        verbose_name='Nazwa listy',
     )
 
     def __str__(self):

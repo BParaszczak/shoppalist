@@ -1,19 +1,23 @@
+from django.db.models import Count
 from django.shortcuts import render
-
+from django.urls import reverse
+from django.urls import reverse_lazy
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin #CBV  wzorzec projektowy 
+from django.contrib.auth.decorators import login_required #FBV
+
 
 from .models import Product, Category, Entry
 
+
+
+@login_required
 # /index/
 def index(request):
     return render(request, "shopping/index.html")
 # /login/
-
-# /shopping/
-def shopping(request):
-    pass
 
 # /products/
 class ListProducts(ListView):
@@ -28,7 +32,6 @@ class AddProduct(CreateView):
     model = Product
     fields = ['name', 'amount', 'unit', 'comment', 'categories', 'urgency', 'owner']
     template_name = 'shopping/p_add.html'
-    success_message = 'Produkt "%(product)s" został dodany do listy'
     extra_context ={   
         'title': 'Dodaj nowy produkt',
     }
@@ -38,7 +41,6 @@ class ProductUpdate(UpdateView):
     model = Product
     fields = ['name', 'amount', 'unit', 'comment', 'categories', 'urgency', 'owner']
     template_name = 'shopping/p_edit.html'
-    success_message = 'Produkt "%(product)s" został zmodyfikowany'
     extra_context ={   
         'title': 'Edytuj produkt:',
     }
@@ -48,6 +50,7 @@ class ProductDelete(DeleteView):
     model = Product
     fields = ['name']
     template_name = 'shopping/p_delete.html'
+    success_url = reverse_lazy('products')
     extra_context = {
         'title': 'Czy chcesz usunąć produkt?'
     }
@@ -66,6 +69,7 @@ class AddCategory(CreateView):
     model = Category
     template_name = 'shopping/c_add.html'
     fields = ['name']
+    success_url = reverse_lazy('categories')
     extra_context ={   
         'title': 'Utwórz nową listę',
     }
@@ -76,15 +80,16 @@ class CategoryUpdate(UpdateView):
     template_name = 'shopping/c_edit.html'
     fields = ['name']
     extra_context ={   
-        'title': 'Edytuj listę',
+        'title': 'Zmień nazwę listy',
     }
 # /categories/delete/
 class CategoryDelete(DeleteView):
     model = Category
     template_name = 'shopping/c_delete.html'
     fields = ['name']
+    success_url = reverse_lazy('categories')
     extra_context ={   
-        'title': 'Usuń listę',
+        'title': 'Czy chcesz usunąć poniższą listę?',
     }
 
 # /categories/<int:pk>/
@@ -93,12 +98,13 @@ class CategoryDetails(DetailView):
     template_name = 'shopping/category.html'
     fields = ['name']
     extra_context ={   
-        'title': '{%(name)s}',
+        'title': '',
     }
 
 
 # /categories/
 class ListCategories(ListView):
+    queryset = Category.objects.annotate(liczba=Count('product'))
     model = Category 
     template_name = 'shopping/cat_list.html'
     extra_context ={     

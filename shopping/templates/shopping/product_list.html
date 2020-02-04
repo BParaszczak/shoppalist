@@ -3,7 +3,11 @@
 {% block content %}
 <ul>
     {% for p in object_list %}
-    <li><a href="{% url 'product' p.pk %}">{{ p }}</a></li>
+    <li><input class=bought type="checkbox">&nbsp;<a href="{% url 'product' pk=p.pk %}">{{ p }}</a></li>
     {% endfor %}
+</ul>
+
+<ul class="buttons">
+    <li><a class="sub" href="{% url 'p_add' %}">Dodaj nowy produkt</a></li>
 </ul>
 {% endblock %}
