@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
+<ul class="breadcrumb">
+    <li><a href="{% url 'index' %}">Start</a></li>
+    <li>&gt</li>
+    <li><a href="{% url 'categories' %}">Moje listy</a></li>
+    <li>&gt</li>
+    <li><a href="{% url 'products' %}">Produkty</a></li>
+    <li>&gt</li>
+    <li><a href="{% url 'p_add' %}">Dodaj produkt</a></li>
+</ul>
 <form method="post">
     {% csrf_token %}
     <table>{{ form.as_table }}</table>

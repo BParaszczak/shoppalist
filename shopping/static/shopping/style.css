@@ -51,10 +51,28 @@ nav {
     font-size: 18px;
 }
 
+.breadcrumb {
+    display: flex;
+    font-size: 12px !important;
+    color: #ee7b00 !important;
+    padding: 0 !important;
+    margin-bottom: 20px;
+}
+
+.breadcrumb li {
+    font-size: 12px !important;
+    color: #ee7b00 !important;
+    margin-right: 15px;
+}
+
+.breadcrumb li a {
+    font-size: 12px !important;
+    color: #ee7b00 !important;
+}
 
 h3 {
     margin-top: 40px;
-    padding: 0 0 20px 80px;
+    padding: 0 0 10px 80px;
     font-size: 20px;
     color: #ebb112;
 }
@@ -157,7 +175,7 @@ small a {
     font-weight: 500;
     text-decoration: none;
     font-size: 16px;
-    background-color: #f04e03;
+    background-color: #ee7b00;
     border: none;
     border-radius: 3px;
     box-shadow: 5px 5px 5px #031e30;

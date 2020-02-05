@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+<ul class="breadcrumb">
+    <li><a href="{% url 'index' %}">Start</a></li>
+    <li>&gt</li>
+    <li><a href="{% url 'categories' %}"></a>Moje listy</li>
+</ul>
 <ul>
     {% for cat in object_list %}
     <li><a href="{% url 'category' cat.pk %}">{{ cat }} ({{ cat.liczba }})</a></li>

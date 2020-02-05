@@ -1,19 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<ul class="breadcrumb">
+    <li><a href="{% url 'index' %}">Start</a></li>
+    <li>&gt</li>
+    <li><a href="{% url 'categories' %}">Moje listy</a></li>
+    <li>&gt</li>
+    <li><a href="{% url 'category' pk=object.pk %}">{{ object }}</a></li>
+</ul>
 <p>{{ object }}</p>
 
 <ul>
     {% for p in object.product_set.all %}
-    <li><input class=bought type="checkbox">&nbsp;<a href="{% url 'product' p.pk %}">{{ p }}</a></li>
+    <li><input class=bought type="checkbox" name="bought">&nbsp;<a href="{% url 'product' p.pk %}">{{ p }}</a></li>
     {% endfor %}
 </ul>
 
+
 <ul class="buttons">
     <li><a class="sub" href="{% url 'categories' %}">Wróć do moich list</a></li>
+    <li><a class="sub" href="{% url 'p_add' %}">Dodaj produkt</a></li>
+    <li><a class="sub" href="{% url 'category' pk=object.pk %}">Usuń zaznaczone</a></li>
     <li><a class="sub" href="{% url 'c_edit' pk=object.pk %}">Zmień nazwę listy</a></li>
     <li><a class="sub" href="{% url 'c_delete' pk=object.pk %}">Usuń listę</a></li>
 </ul>
+
 
 {% endblock %}
