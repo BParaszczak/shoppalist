@@ -23,17 +23,12 @@ class Product(models.Model):
         ('m', 'm'),
     ]
 
-    URGENT = [
-        ('yes', 'Tak'),
-        ('no', 'Nie')
-    ]
-
+    
     name = models.CharField(max_length=50, verbose_name="Nazwa")
     amount = models.FloatField(blank=True, default=0, verbose_name="Ilość")
     unit = models.CharField(max_length=6, choices=UNITS, default='pcs', verbose_name="Jednostka") #tu rozwijana lista z jednostkami: pcs, kg, l, box, bottle, dag
     comment = models.CharField(max_length=100, blank=True, default='-', verbose_name="Uwagi")
     # add_date = models.DateTimeField(, verbose_name="Added")
-    urgency = models.CharField(max_length=10, verbose_name="Pilne", choices=URGENT, default='no')
     categories = models.ManyToManyField(
         'Category', 
         through='Entry',

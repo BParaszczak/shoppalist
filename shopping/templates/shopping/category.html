@@ -8,19 +8,24 @@
     <li>&gt</li>
     <li><a href="{% url 'category' pk=object.pk %}">{{ object }}</a></li>
 </ul>
-<p>{{ object }}</p>
 
-<ul>
-    {% for p in object.product_set.all %}
-    <li><input class=bought type="checkbox" name="bought">&nbsp;<a href="{% url 'product' p.pk %}">{{ p }}</a></li>
-    {% endfor %}
-</ul>
+
+<form method="POST">
+    {% csrf_token %}
+    <ul>
+        {% for p in object.product_set.all %}
+        <li><input type="checkbox" name="products" value="{{ p.pk }}">&nbsp;<a
+                href="{% url 'product' pk=p.pk %}">{{ p }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <input class="sub" type="submit" value="Usuń zaznaczone">
+</form>
 
 
 <ul class="buttons">
     <li><a class="sub" href="{% url 'categories' %}">Wróć do moich list</a></li>
     <li><a class="sub" href="{% url 'p_add' %}">Dodaj produkt</a></li>
-    <li><a class="sub" href="{% url 'category' pk=object.pk %}">Usuń zaznaczone</a></li>
     <li><a class="sub" href="{% url 'c_edit' pk=object.pk %}">Zmień nazwę listy</a></li>
     <li><a class="sub" href="{% url 'c_delete' pk=object.pk %}">Usuń listę</a></li>
 </ul>

@@ -113,6 +113,7 @@ footer {
     right: 20px;
     width: 100%;
     align-items: center;
+    z-index: -1;
 }
 
 footer ul {
@@ -161,7 +162,7 @@ small a {
 
 .buttons {
     display: flex;
-    margin: 40px;
+    margin-left: 40px;
 }
 
 .sub a {}
