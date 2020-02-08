@@ -1,0 +1,1 @@
+web: gunicorn shoppalist.wsgi --log-file -
