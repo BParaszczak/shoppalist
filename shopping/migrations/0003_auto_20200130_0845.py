@@ -44,6 +44,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='product',
             name='owner',
-            field=models.ForeignKey(blank=True, default='All', on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(blank=True, default=0, on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL),
         ),
     ]
