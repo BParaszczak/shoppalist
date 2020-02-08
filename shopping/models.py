@@ -44,7 +44,8 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('product', args=[self.pk])
-    
+
+        
     class Meta:
         verbose_name = 'Product'
         verbose_name_plural = 'Products'

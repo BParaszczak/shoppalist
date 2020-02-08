@@ -1,4 +1,4 @@
-from django.db.models import Count
+from django.db.models import Count, Prefetch, Q
 from django.shortcuts import render
 from django.urls import reverse
 from django.urls import reverse_lazy
@@ -9,7 +9,6 @@ from django.views.generic.edit import FormMixin, ProcessFormView
 from django.contrib.auth.mixins import LoginRequiredMixin #CBV  wzorzec projektowy 
 from django.contrib.auth.decorators import login_required #FBV
 
-
 from .models import Product, Category, Entry
 from .forms import DeleteSelectedForm
 
@@ -17,6 +16,7 @@ from .forms import DeleteSelectedForm
 @login_required
 # /index/
 def index(request):
+    
     return render(request, "shopping/index.html")
 # /login/
 
@@ -33,6 +33,10 @@ class ListProducts(FormMixin, ListView, ProcessFormView):
         self.object_list = self.get_queryset()
 
         return super().post(request, *args, **kwargs)
+
+    def get_queryset(self):
+
+        return Product.objects.filter(Q(owner=self.request.user) | Q(owner__isnull=True))
 
     def form_valid(self, form):
         for product in form.cleaned_data.get('products', []):
@@ -110,14 +114,12 @@ class CategoryDelete(DeleteView):
 
 # /categories/<int:pk>/
 class CategoryDetails(FormMixin, DetailView, ProcessFormView):
-    model = Category
+    
     template_name = 'shopping/category.html'
     form_class = DeleteSelectedForm
-    # fields = ['name']
     context_object_name = 'name'
-    # extra_context ={   
-    #     'title': 
-    # }
+    
+    
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -137,6 +139,9 @@ class CategoryDetails(FormMixin, DetailView, ProcessFormView):
     def get_success_url(self):
         return reverse('category', args=[self.object.pk])
     
+    def get_queryset(self):
+        prefetch = Prefetch('product_set', queryset=Product.objects.filter(Q(owner=self.request.user) | Q(owner__isnull=True)))
+        return Category.objects.prefetch_related(prefetch)   
       
 
 
