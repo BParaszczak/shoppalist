@@ -1,6 +1,6 @@
 body {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: #084d79;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #000000;
     margin: 0;
     padding: 0;
     color: #ffffff;
@@ -11,9 +11,9 @@ body {
 
 .menu-container {
     padding: 0 0 0 80px;
-    background-color: #053756;
-    border-bottom: 6px dotted #f39129;
-    box-shadow: 5px 5px 5px #031e30;
+    background-color: #2e2f2f;
+    border-bottom: 3px solid #f39129;
+    box-shadow: 5px 5px 5px #151616;
     display: flex;
 }
 
@@ -22,7 +22,7 @@ h1 {
     font-size: 36px;
     font-family: 'Rock Salt', cursive;
     color: #fff;
-    text-shadow: 5px 10px 5px #031e30;
+    text-shadow: 5px 10px 5px #151616;
 }
 
 nav {
@@ -45,10 +45,9 @@ nav {
     width: 100px;
     padding: 10px 20px 10px 20px;
     margin: 0px 15px;
-    border-radius: 3px;
     background-color: #f04e03;
-    box-shadow: 5px 5px 5px #031e30;
-    font-size: 18px;
+    box-shadow: 5px 5px 5px #151616;
+    font-size: 16px;
 }
 
 .breadcrumb {
@@ -73,7 +72,8 @@ nav {
 h3 {
     margin-top: 40px;
     padding: 0 0 10px 80px;
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: 400;
     color: #ebb112;
 }
 
@@ -85,10 +85,9 @@ h3 {
     text-align: auto;
     margin: 15px 0 25px 0;
     padding: 30px 50px;
-    background-color: #053756;
+    background-color: #000000;
     border: 2px solid #ebb112;
-    border-radius: 3px;
-    box-shadow: 5px 5px 5px #031e30;
+    box-shadow: 5px 5px 5px #151616;
 }
 
 
@@ -141,9 +140,8 @@ form {
 
 form input,
 form select {
-    border-radius: 3px;
     margin: 0 15px;
-    box-shadow: 5px 5px 5px #031e30;
+    box-shadow: 5px 5px 5px #151616;
 
 }
 
@@ -175,11 +173,10 @@ small a {
     font-family: inherit;
     font-weight: 500;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 14px;
     background-color: #ee7b00;
     border: none;
-    border-radius: 3px;
-    box-shadow: 5px 5px 5px #031e30;
+    box-shadow: 5px 5px 5px #151616;
 }
 
 .sub:hover {

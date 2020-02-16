@@ -2,13 +2,17 @@ from django.contrib import admin
 
 from .models import Product, Category, Entry
 
+class EntryInline(admin.TabularInline):
+    model = Entry
+    extra = 1
+
 class ProductAdmin(admin.ModelAdmin):
-    product_list = ['name', 'amount', 'unit', 'comment', 'need_date']
-    list_filter = ['name', 'need_date']
-    date_hierarchy = 'need_date'
+    list_display = ['name', 'amount', 'unit', 'comment']
+    list_filter = ['name']
     search_fields = ['name']
-    ordering = ['name', 'amount', 'unit', 'need_date']
+    ordering = ['name', 'amount', 'unit']
     list_select_related = True
+    inlines = (EntryInline,)
 
 class CategoryAdmin(admin.ModelAdmin):
     category_list = ['name']
@@ -16,6 +20,7 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ['name']
     ordering = ['name']
     list_select_related = True
+    inlines = (EntryInline,)
 
 class EntryAdmin(admin.ModelAdmin):
     entry_date = ['add_date']
@@ -23,16 +28,6 @@ class EntryAdmin(admin.ModelAdmin):
     date_hierarchy = 'add_date'
     ordering = ['add_date']
     list_select_related = True
-
-class EntryInline(admin.TabularInline):
-    model = Entry
-    extra = 1
-
-class ProductAdmin(admin.ModelAdmin):
-    inlines = (EntryInline,)
-
-class CategoryAdmin(admin.ModelAdmin):
-    inlines = (EntryInline,)
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
