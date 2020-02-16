@@ -1,6 +1,6 @@
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #000000;
+    background-color: #3b3c41;
     margin: 0;
     padding: 0;
     color: #ffffff;
@@ -11,9 +11,10 @@ body {
 
 .menu-container {
     padding: 0 0 0 80px;
-    background-color: #2e2f2f;
-    border-bottom: 3px solid #f39129;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(144deg, rgba(41, 41, 41, 0.998) 76%, rgb(34, 34, 34) 100%);
     box-shadow: 5px 5px 5px #151616;
+    border-bottom: 3px solid #f39129;
     display: flex;
 }
 
@@ -21,7 +22,7 @@ body {
 h1 {
     font-size: 36px;
     font-family: 'Rock Salt', cursive;
-    color: #fff;
+    color: #f35e19;
     text-shadow: 5px 10px 5px #151616;
 }
 
@@ -45,9 +46,17 @@ nav {
     width: 100px;
     padding: 10px 20px 10px 20px;
     margin: 0px 15px;
+    background-color: #2e2f2f;
+    border: 1px solid #f35e19;
+
+    font-size: 16px;
+    transition: 0.4;
+}
+
+.menu li a:hover {
     background-color: #f04e03;
     box-shadow: 5px 5px 5px #151616;
-    font-size: 16px;
+    border: 1px solid #f04e03;
 }
 
 .breadcrumb {
@@ -85,12 +94,10 @@ h3 {
     text-align: auto;
     margin: 15px 0 25px 0;
     padding: 30px 50px;
-    background-color: #000000;
+    background-color: #2e2f2f;
     border: 2px solid #ebb112;
     box-shadow: 5px 5px 5px #151616;
 }
-
-
 
 p {
     color: #ebb112;
@@ -134,22 +141,25 @@ footer ul li a {
 .content,
 form {
     padding: 0 0 20px 80px;
-
-
 }
 
 form input,
 form select {
     margin: 0 15px;
-    box-shadow: 5px 5px 5px #151616;
-
+    background-color: #f7f3ea;
+    border: none;
 }
+
 
 td,
 tr {
     line-height: 2.0;
     text-align: right;
     padding: 4px;
+}
+
+tr label {
+    font-weight: 400;
 }
 
 small a {
@@ -163,22 +173,26 @@ small a {
     margin-left: 40px;
 }
 
-.sub a {}
+
 
 .sub {
     text-align: center;
     padding: 6px 10px 8px 10px;
-    margin: 0 10px;
-    color: white;
+    margin: 10px;
+    color: #f39129;
     font-family: inherit;
     font-weight: 500;
     text-decoration: none;
     font-size: 14px;
-    background-color: #ee7b00;
-    border: none;
-    box-shadow: 5px 5px 5px #151616;
+    background-color: #3b3c41;
+    border: 1px solid #f39129;
+    transition: 0.4;
+
 }
 
 .sub:hover {
     cursor: pointer;
+    color: white;
+    background-color: #ee7b00;
+    box-shadow: 5px 5px 5px #151616;
 }
